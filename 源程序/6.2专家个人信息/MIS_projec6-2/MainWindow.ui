@@ -1,0 +1,1537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Bauhaus 93</family>
+    <pointsize>12</pointsize>
+    <weight>75</weight>
+    <bold>true</bold>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label_Title">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>20</y>
+      <width>291</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>华文仿宋</family>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>专家个人信息维护</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_name">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>60</y>
+      <width>61</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>姓名：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_EngName">
+    <property name="geometry">
+     <rect>
+      <x>83</x>
+      <y>90</y>
+      <width>61</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>英文名：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_country">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>120</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>国籍：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_sex">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>150</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>性别：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_nation">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>180</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>名族：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_IDtype">
+    <property name="geometry">
+     <rect>
+      <x>67</x>
+      <y>210</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>证件类型：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_birthdata">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>270</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>出生年月：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_isAcademician">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>300</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>是否院士：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_isDocent">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>330</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>是否博导：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_jobTitle">
+    <property name="geometry">
+     <rect>
+      <x>103</x>
+      <y>360</y>
+      <width>41</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>职称：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_education">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>390</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>最高学历：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_degree">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>420</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>最高学位：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SchoolTag">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>450</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>毕业院校：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_GraduateYear">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>500</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>毕业年份：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_major">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>540</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>所学专业：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_name">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>60</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;请输入中文字符&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+    </property>
+    <property name="maxLength">
+     <number>30</number>
+    </property>
+    <property name="placeholderText">
+     <string>请输入中文字符</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_EngName">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>90</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;请输入英文字符&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+    </property>
+    <property name="maxLength">
+     <number>18</number>
+    </property>
+    <property name="placeholderText">
+     <string>请输入英文字符</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_ID">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>240</y>
+      <width>221</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;请输入所选证件的证件号&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+    </property>
+    <property name="maxLength">
+     <number>18</number>
+    </property>
+    <property name="placeholderText">
+     <string>请输入18位证件号码</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_birthdata">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>270</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;输入格式请参考示例&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+    </property>
+    <property name="maxLength">
+     <number>6</number>
+    </property>
+    <property name="placeholderText">
+     <string>YYYYmm</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_GraduateYear">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>500</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+    </property>
+    <property name="maxLength">
+     <number>4</number>
+    </property>
+    <property name="placeholderText">
+     <string>YYYY</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_ID">
+    <property name="geometry">
+     <rect>
+      <x>67</x>
+      <y>240</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>证件号码：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_asteriskName">
+    <property name="geometry">
+     <rect>
+      <x>315</x>
+      <y>63</y>
+      <width>21</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; color:#ff0000;&quot;&gt;*&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_country">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>120</y>
+      <width>151</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>**请选择**</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>中国</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>日本</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>英国</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>美国</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboBox_nation">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>180</y>
+      <width>151</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string notr="true">**请选择**</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>汉族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>满族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>回族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>壮族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>苗族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>维吾尔族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>土家族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>蒙古族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>藏族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>布依族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>朝鲜族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>侗族</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>瑶族</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboBox_IDtype">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>210</y>
+      <width>151</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string notr="true">**请选择**</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>身份证</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>护照</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>军官证</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>其他</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>150</y>
+      <width>151</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_sex">
+     <item>
+      <widget class="QRadioButton" name="radioButton_man">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>男</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_woman">
+       <property name="text">
+        <string>女</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>330</y>
+      <width>141</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout__doctor">
+     <item>
+      <widget class="QRadioButton" name="radioButton_Ydoc">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>是</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_Ndoc">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>否</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="label_asteriskID">
+    <property name="geometry">
+     <rect>
+      <x>382</x>
+      <y>243</y>
+      <width>21</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; color:#ff0000;&quot;&gt;*&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_asteriskIDtype">
+    <property name="geometry">
+     <rect>
+      <x>313</x>
+      <y>214</y>
+      <width>21</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; color:#ff0000;&quot;&gt;*&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>290</y>
+      <width>449</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_Academician">
+     <item>
+      <widget class="QRadioButton" name="radioButton_AS">
+       <property name="text">
+        <string>两院院士</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_S">
+       <property name="text">
+        <string>科学院院士</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_E">
+       <property name="text">
+        <string>工程院院士</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_N">
+       <property name="text">
+        <string>否</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QComboBox" name="comboBox_jobTitle">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>360</y>
+      <width>151</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string notr="true">**请选择**</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>正高级</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>副高级</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>中级</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>其他</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboBox_education">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>390</y>
+      <width>151</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>**请选择**</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>研究生</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>本科</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>专科</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>高中</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>其他</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>410</y>
+      <width>261</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_degree">
+     <item>
+      <widget class="QRadioButton" name="radioButton_D">
+       <property name="text">
+        <string>博士</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_G">
+       <property name="text">
+        <string>硕士</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_B">
+       <property name="text">
+        <string>学士</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_O">
+       <property name="text">
+        <string>其他</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_school">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>450</y>
+      <width>381</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+    </property>
+    <property name="placeholderText">
+     <string>依次列出毕业院校</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_major">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>530</y>
+      <width>381</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+    </property>
+    <property name="placeholderText">
+     <string>输入专业信息</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_asteriskMajor">
+    <property name="geometry">
+     <rect>
+      <x>545</x>
+      <y>536</y>
+      <width>21</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; color:#ff0000;&quot;&gt;*&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_asteriskJobTitle">
+    <property name="geometry">
+     <rect>
+      <x>313</x>
+      <y>364</y>
+      <width>21</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; color:#ff0000;&quot;&gt;*&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_Notice">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>580</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; color:#000000;&quot;&gt;注：&lt;/span&gt;&lt;span style=&quot; font-size:18pt; color:#ff0000; vertical-align:sub;&quot;&gt;*&lt;/span&gt;&lt;span style=&quot; font-size:14pt; color:#000000;&quot;&gt;为必填项&lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:400; color:#000000;&quot;&gt;!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_showCode">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>612</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>显示源码</string>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_showDB">
+    <property name="geometry">
+     <rect>
+      <x>164</x>
+      <y>612</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>显示数据库</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Help">
+    <property name="geometry">
+     <rect>
+      <x>294</x>
+      <y>612</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帮助</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Save">
+    <property name="geometry">
+     <rect>
+      <x>404</x>
+      <y>612</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>保存</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Exit">
+    <property name="geometry">
+     <rect>
+      <x>514</x>
+      <y>612</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>退出</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_birthDataNotice">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>270</y>
+      <width>271</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold</family>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>格式：yyyymm ; 示例：201808</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <tabstops>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>lineEdit_EngName</tabstop>
+  <tabstop>comboBox_country</tabstop>
+  <tabstop>radioButton_man</tabstop>
+  <tabstop>radioButton_woman</tabstop>
+  <tabstop>comboBox_nation</tabstop>
+  <tabstop>comboBox_IDtype</tabstop>
+  <tabstop>lineEdit_ID</tabstop>
+  <tabstop>lineEdit_birthdata</tabstop>
+  <tabstop>radioButton_AS</tabstop>
+  <tabstop>radioButton_S</tabstop>
+  <tabstop>radioButton_E</tabstop>
+  <tabstop>radioButton_N</tabstop>
+  <tabstop>radioButton_Ydoc</tabstop>
+  <tabstop>radioButton_Ndoc</tabstop>
+  <tabstop>comboBox_jobTitle</tabstop>
+  <tabstop>comboBox_education</tabstop>
+  <tabstop>radioButton_D</tabstop>
+  <tabstop>radioButton_G</tabstop>
+  <tabstop>radioButton_B</tabstop>
+  <tabstop>radioButton_O</tabstop>
+  <tabstop>textEdit_school</tabstop>
+  <tabstop>lineEdit_GraduateYear</tabstop>
+  <tabstop>textEdit_major</tabstop>
+  <tabstop>pushButton_showCode</tabstop>
+  <tabstop>pushButton_showDB</tabstop>
+  <tabstop>pushButton_Help</tabstop>
+  <tabstop>pushButton_Save</tabstop>
+  <tabstop>pushButton_Exit</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton_showCode</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showCode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>90</x>
+     <y>647</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>31</x>
+     <y>601</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_showDB</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showDatabase()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>222</x>
+     <y>650</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>161</x>
+     <y>673</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_Help</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showHelpPage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>342</x>
+     <y>650</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>672</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_Save</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>checkAndSaveData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>435</x>
+     <y>656</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>383</x>
+     <y>670</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_Exit</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>Exit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>532</x>
+     <y>648</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>632</x>
+     <y>613</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_country</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getCountry()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>242</x>
+     <y>155</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>156</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_nation</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getNation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>270</x>
+     <y>212</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>438</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_IDtype</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getIDtype()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>249</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>434</x>
+     <y>242</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_jobTitle</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getJobTitle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>289</x>
+     <y>394</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_education</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getEducation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>293</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>549</x>
+     <y>421</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_man</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectMen()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>191</x>
+     <y>188</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>48</x>
+     <y>181</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_woman</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectWomen()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>263</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>17</x>
+     <y>218</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_Ydoc</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectYdoc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>166</x>
+     <y>365</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>19</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_Ndoc</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectNdoc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>237</x>
+     <y>361</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>19</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_AS</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectAS()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>210</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>637</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_S</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectS()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>334</x>
+     <y>334</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>644</x>
+     <y>222</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_E</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectE()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>436</x>
+     <y>332</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>270</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_N</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectN()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>527</x>
+     <y>332</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>642</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_D</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectD()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>177</x>
+     <y>449</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>631</x>
+     <y>458</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_G</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectG()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>258</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>638</x>
+     <y>502</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_B</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectB()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>326</x>
+     <y>449</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>649</x>
+     <y>542</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_O</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectO()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>392</x>
+     <y>451</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>609</x>
+     <y>566</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>showCode()</slot>
+  <slot>showDatabase()</slot>
+  <slot>showHelpPage()</slot>
+  <slot>checkAndSaveData()</slot>
+  <slot>Exit()</slot>
+  <slot>getNation()</slot>
+  <slot>getCountry()</slot>
+  <slot>getIDtype()</slot>
+  <slot>getJobTitle()</slot>
+  <slot>getEducation()</slot>
+  <slot>selectMen()</slot>
+  <slot>selectWomen()</slot>
+  <slot>selectYdoc()</slot>
+  <slot>selectNdoc()</slot>
+  <slot>selectAS()</slot>
+  <slot>selectS()</slot>
+  <slot>selectE()</slot>
+  <slot>selectO()</slot>
+  <slot>selectN()</slot>
+  <slot>selectD()</slot>
+  <slot>selectG()</slot>
+  <slot>selectB()</slot>
+ </slots>
+</ui>

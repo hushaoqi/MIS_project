@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="../../js/jquery-1.9.1.min.js"></script>  
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../static/jquery.min.js"></script>
+    <script type="text/javascript" src="../../static/bmob.js"></script>
+    <meta charset="UTF-8">
+    <title>学生管理</title>
+    <script type="text/javascript">
+        function deleteRow(r)//删除数据
+        {
+            var row=r.parentNode.parentNode.rowIndex;
+            var j =document.getElementById('student_tab').rows[row].cells ;//student_tab:显示表单的id
+            var pkey = j[0].innerHTML;console.log(pkey);
+
+            var query = new Bmob.Query(Bmob.User);
+            query.equalTo("sno", pkey);//根据主键查询对应信息，学生主键为学号
+            query.find({
+                success: function(results) {
+                    //alert("共查询到 " + results.length + "门课程");
+                    // 循环处理查询到的数据
+                    for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    object.destroy({
+                      success: function(myObject) {
+                        // 删除成功
+                          console.log("移除学生："+pkey);
+                          document.getElementById('student_tab').deleteRow(row);
+                      },
+                      error: function(myObject, error) {
+                        // 删除失败
+                          console.log("移除学生："+pkey+"失败");
+                      }
+                    });
+                    }
+                },
+                error: function(error) {
+                    alert("查询失败: " + error.code + " " + error.message);
+                }
+            });
+        }
+</script>
+<script type="text/javascript">
+    function changedata(r)//修改按钮的对应操作函数
+    {
+         var row=r.parentNode.parentNode.rowIndex;
+         console.log(row);
+         var j =document.getElementById('student_tab').rows[row].cells;
+         var pkey = j[0].innerHTML;console.log(pkey);//所在行的第一个信息
+         //window.location.href="courseChange.html?valus="+pkey;//打开修改课程界面并传递pkey
+        window.open("studentUpdate.html?valus="+pkey,"修改学生信息","toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
+    }
+</script>
+</head>
+
+<body>
+
+<form    class="form-inline">
+	<div class="row alert alert-info" style="margin:0px; padding:0px; padding-left:50px;">
+    	<div class="form-group">
+        	
+            <label>姓名</label>
+            <input type="text" class="form-control" placeholder="请输入姓名" id="myInput" onkeyup="myFunction()">
+            
+        </div>
+        <input type="button" class="btn btn-danger" value="查询">
+        <input type="submit" class="btn btn-danger" value="学生清单"  id="createTab">
+    	<a href="studentAdd.html" class="btn btn-success">添加学生</a>
+    </div>
+	<div class="row"  style="padding:15px;">
+    	<table class="table" id="student_tab">
+        
+            
+        </table>
+    
+    </div>
+</form>
+<script type="text/javascript">
+        $("#createTab").click(function createtab()//显示课程清单
+            {
+                Bmob.initialize("ccf9a7dde02a9f8ec754c88c9c68dcdc", "22810079aeba295046c8b5364d460e16","7f2dfdda981478346d9e742ec33a0628");//从数据库，表Mysubject取信息
+                var query = new Bmob.Query(Bmob.User);
+                // 查询所有数据
+                query.find({
+                  success: function(results) {
+                    var tab="";//表格头
+                      tab+="<tr>";
+                      tab+="<th>学号</th>";
+                      tab+="<th>姓名</th>";
+                      tab+="<th>邮箱</th>";
+                      tab+="<th>性别</th>";
+                      tab+="<th>班级</th>";
+                      tab+="<th>生源地</th>";
+                      tab+="<th>出生日期</th>";
+                      tab+="<th>年龄</th>";
+                      tab+="<th>说明</th>";
+                      tab+="</tr>";
+                    // 循环处理查询到的数据
+                    for (var i = 0; i < results.length; i++)
+                    {
+                        tab+="<tr>";
+                        var object = results[i];
+                        tab+="<td>"+object.get('sno')+"</td>";
+                        tab+="<td>"+object.get('username')+"</td>";
+                        tab+="<td>"+object.get('email')+"</td>";
+                        if(object.get('gender'))
+                        {tab+="<td>女</td>";}
+                        else
+                        {tab+="<td>男</td>";}
+                        tab+="<td>"+object.get('cname')+"</td>";
+                        tab+="<td>"+object.get('address')+"</td>";
+                        tab+="<td>"+object.get('birthday')+"</td>";
+                        tab+="<td>"+object.get('age')+"</td>";
+                        tab+="<td>"+object.get('desc')+"</td>";
+                        tab+="<td><input type='button' value='删除' onclick='deleteRow(this)'></td>"
+                        tab+="<td><input type='button' value='修改' onclick='changedata(this)'></td>"
+                        tab+="</tr>";
+                    }
+                    student_tab.innerHTML=tab;
+                  },
+                  error: function(error) {
+                    alert("查询失败: " + error.code + " " + error.message);
+                  }
+                });
+                return false;
+            })
+        function myFunction() {//按课程名称搜索
+          // 声明变量
+          var input, filter, table, tr, td, i;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("student_tab");//要搜索信息表格的id
+          tr = table.getElementsByTagName("tr");
+
+          // 循环表格每一行，查找匹配项
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+              if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+    </script>
+
+</body>
+</html>

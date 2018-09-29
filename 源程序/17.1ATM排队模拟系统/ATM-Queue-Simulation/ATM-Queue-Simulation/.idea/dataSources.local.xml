@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - song@localhost" uuid="d5aa206c-59ef-42e7-b2ef-4914834f602f">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <introspection-schemas>*:song</introspection-schemas>
+    </data-source>
+  </component>
+</project>

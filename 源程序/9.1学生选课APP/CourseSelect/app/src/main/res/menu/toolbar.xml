@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/scan"
+        android:title="扫描"
+        android:icon="@drawable/scan2"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/loc"
+        android:title="位置"
+        android:icon="@drawable/loc3"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/info"
+        android:title="信息"
+        android:icon="@drawable/info2"
+        app:showAsAction="never" />
+
+</menu>

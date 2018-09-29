@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="../../js/jquery-1.9.1.min.js"></script>  
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../static/jquery.min.js"></script>
+    <script type="text/javascript" src="../../static/bmob.js"></script>
+<meta charset="UTF-8">
+<title>修改学生信息</title>
+
+<script type="text/javascript">//表单中显示要修改课程的信息
+    Bmob.initialize("ccf9a7dde02a9f8ec754c88c9c68dcdc", "22810079aeba295046c8b5364d460e16","7f2dfdda981478346d9e742ec33a0628");
+        var pKey = oneValues();//获取要修改课程的ID
+        console.log(pKey);
+
+       var query = new Bmob.Query(Bmob.User);//创建查找对象
+
+        query.equalTo("sno", pKey);
+        query.find({
+            success: function(results) {
+                console.log("共查询到 " + results.length + " 条记录");
+                // 循环处理查询到的数据
+                for (var i = 0; i < results.length; i++) {
+                var object = results[i];
+                console.log(object.id + ' - ' + object.get('playerName'));
+                document.getElementById("username").value=object.get("username");
+                document.getElementById("email").value=object.get("email");
+                document.getElementById("sno").value=object.get("sno");
+                document.getElementById("gender").value=object.get("gender");
+                document.getElementById("cname").value=object.get("cname");
+                document.getElementById("address").value=object.get("address");
+                document.getElementById("birthday").value=object.get("birthday");
+                document.getElementById("age").value=object.get("age");
+                document.getElementById("desc").value=object.get("desc");
+                console.log("应该进入课程修改函数");
+                }
+            },
+            error: function(error) {
+                alert("查询失败: " + error.code + " " + error.message);
+            }
+        });
+        function oneValues()//获取页面传来的主键值
+        {
+            var result;
+            var url=window.location.search; //获取url中"?"符后的字串
+            if(url.indexOf("?")!=-1){
+            result = url.substr(url.indexOf("=")+1);
+            }
+            return result;
+        }
+    </script>
+</head>
+
+<body>
+
+<form  class="form-horizontal" name="form_ChangeStu">
+        <h5 class="page-header alert-info" style="margin:0px; padding:10px; margin-bottom:10px;">
+        基本信息
+        </h5>
+        
+        <!-- 111 -->
+       <div class="row">
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">学号</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入学号" id="sno" name="sno" required="required"/> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">姓名</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入姓名"  id="username" name="username" required="required"/> 
+                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">邮箱</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入邮箱" id="email" name="email" required="required"/> 
+                    
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">年龄</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入年龄" id="age" name="age"/> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">性别</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入性别" id="gender" name="gender"/> 
+                    
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">生源地</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入生源地" id="address" name="address" /> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">班级</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入班级" id="cname" name="cname" /> 
+                    
+                    </div>
+                </div>
+            </div>
+             <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">说明</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入班级" id="desc" name="desc"  /> 
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- 3333 -->
+       
+                <!-- 222 -->
+        <div class="row">
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">出生年月</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入出生年月" id="birthday" name="birthday"/> 
+                    </div>
+                </div>
+            </div>
+            
+           
+            
+        </div>
+
+       <!-- 2222 -->
+        
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-4">
+                <input type="button" class="btn btn-success" value="修改学生信息" id="btn-changeStu">
+                
+            </div>
+        </div>
+</form>
+
+        <script type="text/javascript">
+        $("#btn-changeStu").click(function changeStudent()
+        {
+            console.log("进入学生修改函数");
+            var sno = document.forms["form_ChangeStu"]["sno"].value;
+            var username = document.forms["form_ChangeStu"]["username"].value;
+            var email = document.forms["form_ChangeStu"]["email"].value;
+            var gender = document.forms["form_ChangeStu"]["gender"].value;//男女
+            if(gender=='女')
+            {gender=true;}
+            else
+            {gender=false;}
+            var cname = document.forms["form_ChangeStu"]["cname"].value;
+            var address = document.forms["form_ChangeStu"]["address"].value;
+            var birthday = document.forms["form_ChangeStu"]["birthday"].value;
+            var age = Number(document.forms["form_ChangeStu"]["age"].value);
+            var desc = document.forms["form_ChangeStu"]["desc"].value;
+
+            var query = new Bmob.Query(Bmob.User);//创建查找对象
+
+            var pKey = sno;//获取主键值
+            console.log(sno+username+email+sno+gender+cname+address+birthday+age+desc);
+            query.equalTo("sno", pKey);
+            query.find({
+                success: function(results) {
+                    console.log("共查询到要修改的数据" + results.length + " 条记录");
+                    // 循环处理查询到的数据
+                    for (var i = 0; i < results.length; i++) {
+                    var user = results[i];
+                    user.set("username", username);
+                    user.set("email", email);
+                    //user.set("sno",sno);
+                    user.set("gender",gender);
+                    user.set("cname",cname);
+                    user.set("address",address);
+                    user.set("birthday",birthday);
+                    user.set("age",age);
+                    user.set("desc",desc);
+                    user.save(null, {
+                          success: function(objectUpdate) {
+                            alert("修改成功:"+objectUpdate.get("score"));
+                          },
+                          error: function(model, error) {
+                            alert("修改失败 fail");
+                          }
+                        });
+
+                        return false;
+                    }
+                },
+                error: function(error) {
+                    console.log("查询失败: " + error.code + " " + error.message);
+                }
+            });
+            return false;
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="../../js/jquery-1.9.1.min.js"></script>  
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../static/jquery.min.js"></script>
+    <script type="text/javascript" src="../../static/bmob.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加学生</title>
+</head>
+
+<body>
+
+<form  class="form-horizontal" name="form-AddSub">
+		<h5 class="page-header alert-info" style="margin:0px; padding:10px; margin-bottom:10px;">
+        基本信息
+        </h5>
+        
+        <!-- 111 -->
+       <div class="row">
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">学号</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入学号" id="sno" name="sno" required="required"/> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">姓名</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入姓名"  id="username" name="username" required="required"/> 
+                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">邮箱</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入邮箱" id="email" name="email" required="required"/> 
+                    
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">年龄</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入年龄" id="age" name="age"/> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">性别</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入性别" id="gender" name="gender"/> 
+                    
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">生源地</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入生源地" id="address" name="address" /> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">班级</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入班级" id="cname" name="cname" /> 
+                    
+                    </div>
+                </div>
+            </div>
+             <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">说明</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入班级" id="desc" name="desc"  /> 
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- 3333 -->
+       
+                <!-- 222 -->
+        <div class="row">
+        	<div class="col-sm-5"> 
+            	<div class="form-group">
+                	<label class="col-sm-3 control-label">出生年月</label>
+                	<div  class="col-sm-9">
+                    	<input type="text" class="form-control" placeholder="请输入出生年月" id="birthday" name="birthday"/> 
+                    </div>
+                </div>
+            </div>
+        	
+           
+            
+        </div>
+
+       <!-- 2222 -->
+        
+        <div class="row">
+        	<div class="col-sm-3 col-sm-offset-4">
+            	<input type="submit" class="btn btn-success" value="添加学生" id="btn-addStu">
+                
+            </div>
+        </div>
+  
+
+</form>
+<script type="text/javascript">
+        $("#btn-addStu").click(function addstudent()
+        {
+            Bmob.initialize("ccf9a7dde02a9f8ec754c88c9c68dcdc", "22810079aeba295046c8b5364d460e16","7f2dfdda981478346d9e742ec33a0628");
+
+            var sno = document.forms["form-AddSub"]["sno"].value;
+            var username = document.forms["form-AddSub"]["username"].value;
+            var email = document.forms["form-AddSub"]["email"].value;
+            var gender = document.forms["form-AddSub"]["gender"].value;//男女
+            if(gender=='女')
+            {gender=true;}
+            else
+            {gender=false;}
+            var cname = document.forms["form-AddSub"]["cname"].value;
+            var address = document.forms["form-AddSub"]["address"].value;
+            var birthday = document.forms["form-AddSub"]["birthday"].value;
+            var age = Number(document.forms["form-AddSub"]["age"].value);
+            var desc = document.forms["form-AddSub"]["desc"].value;
+
+            var user = new Bmob.User();
+            user.set("username", username);
+            user.set("password", "123456");//默认密码
+            user.set("email", email);
+            user.set("sno",sno);
+            user.set("gender",gender);
+            user.set("cname",cname);
+            user.set("address",address);
+            user.set("birthday",birthday);
+            user.set("age",age);
+            user.set("desc",desc);
+            //console.log();
+            user.signUp(null, {
+                success: function(user) {
+                // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+                console.log("添加成功"+user.id);
+                alert("成功添加学生信息："+user.name);
+                return false;
+              },
+              error: function(user, error) {
+                // 添加失败
+                console.log('添加失败'+error);
+                alert("添加失败");
+                return false;
+              }
+            });
+            return false;
+        })
+        </script>
+
+</body>
+</html>

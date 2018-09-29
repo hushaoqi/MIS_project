@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_height="60dp"
+        android:background="@color/app_white"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/plane" />
+
+        <TextView
+            android:id="@+id/tv_plane"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical|left"
+            android:textColor="@color/app_black"
+            android:clickable="true"
+            android:text="飞机大战"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/app_white"
+        android:layout_marginTop="15dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/server2" />
+
+        <TextView
+            android:id="@+id/tv_server"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical|left"
+            android:text="小优"
+            android:textColor="@color/app_black"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/app_white"
+        android:layout_marginTop="15dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/delivery" />
+
+        <TextView
+            android:id="@+id/tv_delivery"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical|left"
+            android:textColor="@color/app_black"
+            android:text="快递查询"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/app_white"
+        android:layout_marginTop="15dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/forum" />
+
+        <TextView
+            android:id="@+id/tv_forum"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical|left"
+            android:textColor="@color/app_black"
+            android:text="卧谈会"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

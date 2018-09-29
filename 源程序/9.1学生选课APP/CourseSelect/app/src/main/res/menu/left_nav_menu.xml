@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <!--<item
+            android:id="@+id/nav_call"
+            android:icon="@drawable/nav_call"
+            android:title="Call" />-->
+        <item
+            android:id="@+id/nav_draw"
+            android:icon="@drawable/draw"
+            android:title="个性装扮" />
+        <item
+            android:id="@+id/nav_collection"
+            android:icon="@drawable/collection"
+            android:title="我的收藏" />
+        <item
+            android:id="@+id/nav_photos"
+            android:icon="@drawable/photos"
+            android:title="我的相册" />
+        <item
+            android:id="@+id/nav_ding"
+            android:icon="@drawable/ding"
+            android:title="消息" />
+    </group>
+</menu>

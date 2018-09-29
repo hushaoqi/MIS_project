@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bb_menu_timetable"
+        android:icon="@drawable/timetable"
+        android:title="timetable" />
+    <item
+        android:id="@+id/bb_menu_server"
+        android:icon="@drawable/server"
+        android:title="server" />
+    <item
+        android:id="@+id/bb_menu_course"
+        android:icon="@drawable/course"
+        android:title="course" />
+
+    <!-- <item
+        android:id="@+id/bb_menu_trends"
+        android:icon="@drawable/trends"
+        android:title="trends" /> -->
+
+</menu>

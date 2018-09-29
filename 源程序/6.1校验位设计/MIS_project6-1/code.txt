@@ -1,0 +1,74 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'MIS_project6-1'
+#
+# Created by: PyQt5 UI code generator 5.11.2
+#
+# WARNING! All changes made in this file will be lost!
+import sys
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from parityBitMain import *
+from helpDialog import *
+from PyQt5.QtSql import *
+import pymysql
+
+class CheckCode(QMainWindow,Ui_MainWindow):
+    def __init__(self,parent = None):
+        super(CheckCode,self).__init__(parent)
+        self.setupUi(self)
+        #设置Ui_MainWindow窗口逻辑功能
+
+#帮助页面显示函数
+    def helpShow(self):
+        self.h = HelpDialog()
+        self.h.show()
+ #数据库显示函数
+    # def showDatebase(self):
+    #     conn = pymysql.connect(host='localhost', user="root", passwd="root", db="com_information",
+    #                            port=3306, charset="utf8")
+    #     # 使用cursor()方法获取操作游标
+    #     cursor = conn.cursor()
+    #退出显示函数
+    def Exec(self):
+        self.close()
+    #显示源码按钮点击槽函数
+    #打开源码文件
+    def CodeShowClick(self):
+        code = QProcess.execute("explorer code.txt")
+#帮助页面显示源代码
+    # def showCode(self):
+    #
+    #     dlg = QFileDialog()
+    #     dlg.setFileMode(QFileDialog.AnyFile)
+    #     dlg.setFilter(QDir.Files)
+    #
+    #     if dlg.exec_():
+    #
+    #         filenames = dlg.selectedFiles()
+    #         f = open(filenames[0],'r')
+    #
+    #         with f:
+    #             data = f.read()
+    #             self.contents.setText(data)
+
+
+
+class HelpDialog(QMainWindow,Ui_showHelpDialog):
+    def __init__(self,parent = None):
+        super(HelpDialog,self).__init__(parent)
+        self.setupUi(self)
+        #设置Ui_showHelpDialog窗口逻辑功能
+
+
+
+
+if __name__=="__main__":
+    app = QApplication(sys.argv)
+    checkcode = CheckCode()
+    checkcode.show()
+
+    sys.exit(app.exec_())
+
+

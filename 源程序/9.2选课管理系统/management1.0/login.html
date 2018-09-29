@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>用户登录</title>
+<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+<script src="js/jquery-1.9.1.min.js"></script>  
+<script src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./static/jquery.min.js"></script>
+    <script type="text/javascript" src="./static/bmob.js"></script>
+<style  type="text/css">
+
+body{ 
+background:url(images/bg.jpg);
+background-position:center;
+background-repeat:no-repeat;
+background-size:cover;/*让背景基于容器*/
+background-attachment:fixed;/*当内容高度大雨图片高度，背景图像的位置相对viewport固定*/
+margin-left:auto;
+margin-right:auto;
+margin-top:200px;
+width:20em;
+}
+
+
+
+</style>
+</head>
+
+<body>
+<form action="index.html" name="login">
+	<div class="form-group">
+    	<label class="sr-only" for="userId">帐号</label>
+        <div class="input-group">
+        	<div class="input-group-addon">帐号</div>
+        	<input type="text" class="form-control" id="username" name="username" placeholder="请输入帐号"/>
+         </div>
+    </div>
+	<div class="form-group">
+    	<label class="sr-only" for="userId">密码</label>
+        <div class="input-group">
+        	<div class="input-group-addon">密码</div>
+        	<input type="text" class="form-control"  id="password" name="pwd" placeholder="请输入密码"/>
+         </div>
+         <span class="help-block u-errormessage" id="js-server-helpinfo">&nbsp;</span>
+    </div>
+	<!-- 按钮-->
+    <input type="submit" style="width:280px;" value="登 录" class="btn btn-success" id="js-btn-login"/>
+</form>
+
+<script type="text/javascript">
+    
+        $("#js-btn-login").click(function logincheck()
+        {
+            Bmob.initialize("ccf9a7dde02a9f8ec754c88c9c68dcdc", "22810079aeba295046c8b5364d460e16");
+            var myname = document.forms["login"]["username"].value;
+            var mypass = document.forms["login"]["pwd"].value;
+            var Admin = Bmob.Object.extend("admin");
+            var query = new Bmob.Query(Admin);
+            console.log(myname+"测试"+mypass);
+            query.equalTo("username",myname);
+            query.equalTo("password",mypass);
+            query.find({
+                success: function(results) {
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        console.log(object.get("username"));
+                        console.log(object.get("password"));
+                        window.location.href = "./index.html";
+                    }
+                    document.getElementById("js-server-helpinfo").innerHTML="错误的用户名或密码";
+                },
+                error: function(error) {
+                }
+            });
+            return false;
+        })
+        </script>
+</body>
+</html>

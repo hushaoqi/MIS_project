@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>修改课程</title>
+<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="../../js/jquery-1.9.1.min.js"></script>  
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../static/jquery.min.js"></script>
+    <script type="text/javascript" src="../../static/bmob.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+
+<form  class="form-horizontal" name="form-AddSub">
+		<h5 class="page-header alert-info" style="margin:0px; padding:10px; margin-bottom:10px;">
+        基本信息
+        </h5>
+        
+        <!-- 111 -->
+       <div class="row">
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">课程号</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入课程号" required="required" id="subjectId" name="subjectId"/> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">课程名</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入课程名" required="required" id="name" name="name"/> 
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">学分</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入学分" required="required" id="credit" name="credit"/> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">教师</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入教师" required="required" id="teacher" name="teacher" /> 
+                    
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">课程容量</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入课程容量" required="required" id="subjectNum" name="subjectNum" /> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">上课周次</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="以英文字符“,”分隔每个数字" required="required" id="weekList" name="weekList"/> 
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- 3333 -->
+       
+                <!-- 222 -->
+        <div class="row">
+        	<div class="col-sm-5"> 
+            	<div class="form-group">
+                	<label class="col-sm-3 control-label">星期</label>
+                	<div  class="col-sm-9">
+                    	<input type="text" class="form-control" placeholder="请输入上课星期" required="required" id="day" name="day" /> 
+                    </div>
+                </div>
+            </div>
+        	<div class="col-sm-5"> 
+            	<div class="form-group">
+                	<label class="col-sm-3 control-label">节次</label>
+                	<div  class="col-sm-9">
+                    	<input type="text" class="form-control" placeholder="请输入上课节次" required="required" id="start" name="start"/> 
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">节数</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入上课节数" required="required" id="step" name="step" /> 
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">教室</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入上课教室" required="required" id="room" name="room" /> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">学期</label>
+                    <div  class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入开课学期" required="required" id="term" name="term"/> 
+                    
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+
+       <!-- 2222 -->
+        
+        <div class="row">
+        	<div class="col-sm-3 col-sm-offset-4">
+            	<input type="submit" class="btn btn-success" value="添加课程" id="btn-addSub">
+                
+            </div>
+        </div>
+  
+
+</form>
+
+<script type="text/javascript">
+        $("#btn-addSub").click(function addsubject()
+        {
+             Bmob.initialize("ccf9a7dde02a9f8ec754c88c9c68dcdc", "22810079aeba295046c8b5364d460e16");
+            var subjectId = Number(document.forms["form-AddSub"]["subjectId"].value);
+            var name = document.forms["form-AddSub"]["name"].value;
+            var credit = Number(document.forms["form-AddSub"]["credit"].value);
+            var teacher = document.forms["form-AddSub"]["teacher"].value;
+            var subjectNum = Number(document.forms["form-AddSub"]["subjectNum"].value);
+            var weekList_temp = document.forms["form-AddSub"]["weekList"].value;
+            var day = Number(document.forms["form-AddSub"]["day"].value);
+            var start = Number(document.forms["form-AddSub"]["start"].value);
+            var step = Number(document.forms["form-AddSub"]["step"].value);
+            var room = document.forms["form-AddSub"]["room"].value;
+            var term = document.forms["form-AddSub"]["term"].value;
+            var weekList=new Array();
+            weekList = weekList_temp.split(",");//以“,”为分割将字符串转为数组
+            for(var i=0;i<weekList.length;i++)
+            {
+                weekList[i]=Number(weekList[i]);
+            }
+            var MySubject = Bmob.Object.extend("MySubject");
+            subject = new MySubject();
+            subject.set("subjectId",subjectId);
+            subject.set("name",name);
+            subject.set("credit",credit);
+            subject.set("teacher",teacher);
+            subject.set("subjectNum",subjectNum);
+            subject.set("weekList",weekList);
+            subject.set("day",day);
+            subject.set("start",start);
+            subject.set("step",step);
+            subject.set("room",room);
+            subject.set("term",term);
+            console.log(subjectId+name+credit+teacher+subjectNum+weekList+day+start+step+room+term);
+            subject.save(null, {
+                success: function(result) {
+                // 添加成功，返回成功之后的objectId（注意：返回的属性名字是id，不是objectId），你还可以在Bmob的Web管理后台看到对应的数据
+                console.log("添加成功"+result.id);
+                alert("成功添加课程："+result.name);
+                return false;
+              },
+              error: function(result, error) {
+                // 添加失败
+                console.log('添加失败'+error);
+                alert("添加失败");
+                return false;
+              }
+            });
+            return false;
+        })
+        </script>
+
+</body>
+</html>

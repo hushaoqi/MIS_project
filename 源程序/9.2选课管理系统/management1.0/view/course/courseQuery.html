@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>管理系统</title>
+<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="../../js/jquery-1.9.1.min.js"></script>  
+<script src="../../assets/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../../static/jquery.min.js"></script>
+    <script type="text/javascript" src="../../static/bmob.js"></script>
+    <meta charset="UTF-8">
+    <title>课程管理</title>
+    <script type="text/javascript">
+        function deleteRow(r)//删除数据
+        {
+            var row=r.parentNode.parentNode.rowIndex;
+            var j =document.getElementById('course_tab').rows[row].cells ;
+            var pkey = j[0].innerHTML;console.log(pkey);
+            pkey=Number(pkey);
+            var MySubject = Bmob.Object.extend("MySubject");
+            var query = new Bmob.Query(MySubject);
+            query.equalTo("subjectId", pkey);
+            query.find({
+                success: function(results) {
+                    //alert("共查询到 " + results.length + "门课程");
+                    // 循环处理查询到的数据
+                    for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    object.destroy({
+                      success: function(myObject) {
+                        // 删除成功
+                          console.log("删除课程："+pkey);
+                          document.getElementById('course_tab').deleteRow(row);
+                      },
+                      error: function(myObject, error) {
+                        // 删除失败
+                      }
+                    });
+                    }
+                },
+                error: function(error) {
+                    alert("查询失败: " + error.code + " " + error.message);
+                }
+            });
+        }
+</script>
+<script type="text/javascript">
+    function changedata(r)
+    {
+         var row=r.parentNode.parentNode.rowIndex;
+         console.log(row);
+         var j =document.getElementById('course_tab').rows[row].cells ;
+         var pkey = j[0].innerHTML;console.log(pkey);//所在行的第一个信息
+         //window.location.href="courseChange.html?valus="+pkey;//打开修改课程界面并传递pkey
+        window.open("courseUpdate.html?valus="+pkey,"修改课程信息","toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
+    }
+</script>
+
+
+</head>
+
+<body>
+
+<form    class="form-inline">
+	<div class="row alert alert-info" style="margin:0px; padding:0px; padding-left:50px;">
+    	<div class="form-group">
+        	<label>搜索课程</label>
+            <input type="text" class="form-control" placeholder="请输入课程名称" id="myInput" onkeyup="myFunction()">
+        </div>
+        <input type="button" class="btn btn-danger" value="查询">
+        
+        <input type="submit" class="btn btn-danger" value="课程清单" id="createTab">
+    	<a href="courseAdd.html" class="btn btn-success">添加课程信息</a>
+    </div>
+	<div class="row"  style="padding:15px;">
+    	<table class="table" id="course_tab">
+        	
+        </table>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+        $("#createTab").click(function createtab()//显示课程清单
+            {
+                Bmob.initialize("ccf9a7dde02a9f8ec754c88c9c68dcdc", "22810079aeba295046c8b5364d460e16");
+                var MySubject = Bmob.Object.extend("MySubject");
+                var query = new Bmob.Query(MySubject);
+                // 查询所有数据
+                query.find({
+                  success: function(results) {
+                    var tab="";//表格头
+                      tab+="<tr>";
+                      tab+="<th>课程号</th>";
+                      tab+="<th>课程名</th>";
+                      tab+="<th>学分</th>";
+                      tab+="<th>教师</th>";
+                      tab+="<th>课程容量</th>";
+                      tab+="<th>上课周次</th>";
+                      tab+="<th>星期</th>";
+                      tab+="<th>节次</th>";
+                      tab+="<th>节数</th>";
+                      tab+="<th>教室</th>";
+                      tab+="<th>开课学期</th>";
+                      tab+="</tr>";
+                    // 循环处理查询到的数据
+                    for (var i = 0; i < results.length; i++)
+                    {
+                        tab+="<tr>";
+                        var object = results[i];
+                        tab+="<td>"+object.get('subjectId')+"</td>";
+                        tab+="<td>"+object.get('name')+"</td>";
+                        tab+="<td>"+object.get('credit')+"</td>";
+                        tab+="<td>"+object.get('teacher')+"</td>";
+                        tab+="<td>"+object.get('subjectNum')+"</td>";
+                        tab+="<td>"+object.get('weekList')+"</td>";
+                        tab+="<td>"+object.get('day')+"</td>";
+                        tab+="<td>"+object.get('start')+"</td>";
+                        tab+="<td>"+object.get('step')+"</td>";
+                        tab+="<td>"+object.get('room')+"</td>";
+                        tab+="<td>"+object.get('term')+"</td>";
+                        tab+="<td><input type='button' value='删除' onclick='deleteRow(this)'></td>"
+                        tab+="<td><input type='button' value='修改' onclick='changedata(this)'></td>"
+                        tab+="</tr>";
+                    }
+                    course_tab.innerHTML=tab;
+                  },
+                  error: function(error) {
+                    alert("查询失败: " + error.code + " " + error.message);
+                  }
+                });
+                return false;
+            })
+        function myFunction() {//按课程名称搜索
+          // 声明变量
+          var input, filter, table, tr, td, i;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("course_tab");
+          tr = table.getElementsByTagName("tr");
+
+          // 循环表格每一行，查找匹配项
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+              if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+    </script>
+
+
+</body>
+</html>

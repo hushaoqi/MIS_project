@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rl_title_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" >
+
+        <Button
+            android:id="@+id/btn_left"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/app_white"
+            android:background="@drawable/left_button"
+            android:text="发布信息" />
+
+        <Button
+            android:id="@+id/btn_right"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/app_qing"
+            android:layout_toRightOf="@+id/btn_left"
+            android:background="@drawable/right_button"
+            android:text="查看发布" />
+    </RelativeLayout>
+</LinearLayout>

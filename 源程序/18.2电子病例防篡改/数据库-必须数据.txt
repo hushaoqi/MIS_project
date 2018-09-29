@@ -1,0 +1,5 @@
+INSERT INTO digital_record_system.d_department (id, name) VALUES (1, '内科');
+
+INSERT INTO digital_record_system.d_department (id, name) VALUES (2, '外科');
+
+INSERT INTO digital_record_system.d_department (id, name) VALUES (3, '心血管科');

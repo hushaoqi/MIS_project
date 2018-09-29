@@ -1,0 +1,124 @@
+//½¨¿â
+CREATE DATABASE digital_record_system  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci£»
+
+//½¨±í
+
+create table d_department
+(
+	id int auto_increment
+		primary key,
+	name varchar(10) not null,
+	constraint d_department_name_uindex
+		unique (name)
+)
+engine=InnoDB
+;
+
+create table d_medical_record
+(
+	id int auto_increment
+		primary key,
+	r_name varchar(8) not null,
+	company varchar(32) not null,
+	gender int not null,
+	address varchar(128) not null,
+	age int not null,
+	department_id int not null,
+	nation varchar(10) not null,
+	r_date datetime default CURRENT_TIMESTAMP not null,
+	symptom varchar(256) not null,
+	conclusion varchar(256) not null,
+	constraint d_medical_record_r_name_uindex
+		unique (r_name),
+	constraint d_medical_record_d_department_id_fk
+		foreign key (department_id) references d_department (id)
+)
+engine=InnoDB
+;
+
+create index d_medical_record_d_department_id_fk
+	on d_medical_record (department_id)
+;
+
+create table d_private_key
+(
+	id int auto_increment
+		primary key,
+	key_y varchar(308) not null,
+	key_g varchar(308) not null,
+	key_p varchar(308) not null,
+	key_q varchar(308) not null,
+	key_x varchar(308) not null
+)
+engine=InnoDB
+;
+
+create table d_doctor_info
+(
+	id int auto_increment
+		primary key,
+	name varchar(8) not null,
+	department_id int not null,
+	gender int default '0' null,
+	age int null,
+	private_key_id int not null,
+	constraint d_doctor_info_priviate_key_id_uindex
+		unique (private_key_id),
+	constraint d_doctor_info_d_department_id_fk
+		foreign key (department_id) references d_department (id),
+	constraint d_doctor_info_d_private_key_id_fk
+		foreign key (private_key_id) references d_private_key (id)
+)
+engine=InnoDB
+;
+
+create index d_doctor_info_d_department_id_fk
+	on d_doctor_info (department_id)
+;
+
+create table d_user
+(
+	id int auto_increment
+		primary key,
+	username varchar(12) not null,
+	pwd varchar(64) not null,
+	salt varchar(32) not null,
+	doctor_info_id int not null,
+	constraint d_user_username_uindex
+		unique (username),
+	constraint d_user_pwd_uindex
+		unique (pwd),
+	constraint d_user_d_doctor_info_id_fk
+		foreign key (doctor_info_id) references d_doctor_info (id)
+)
+engine=InnoDB
+;
+
+create table d_digital_sign
+(
+	id int auto_increment
+		primary key,
+	doctor_id int not null,
+	record_id int not null,
+	sign_1 varchar(50) not null,
+	sign_2 varchar(50) not null,
+	constraint d_digital_sign_d_user_id_fk
+		foreign key (doctor_id) references d_user (id),
+	constraint d_digital_sign_d_medical_record_id_fk
+		foreign key (record_id) references d_medical_record (id)
+)
+engine=InnoDB
+;
+
+create index d_digital_sign_d_doctor_info_id_fk
+	on d_digital_sign (doctor_id)
+;
+
+create index d_digital_sign_d_medical_record_id_fk
+	on d_digital_sign (record_id)
+;
+
+create index d_user_d_doctor_info_id_fk
+	on d_user (doctor_info_id)
+;
+

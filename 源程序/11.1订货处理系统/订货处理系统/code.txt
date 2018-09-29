@@ -1,0 +1,729 @@
+main.py
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+from MySql import(
+    getAllCustomers, getAllProducts, getArrears, getInventory, getProductUnit
+) 
+from PyQt5 import QtCore, QtGui, QtWidgets
+import datetime
+from ui2 import Ui_Dialog
+import sys
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
+
+
+
+MySql.py
+import pymysql
+
+config = {
+          'host':'172.19.195.175',#数据库所在主机IP
+          'port':3306,#MySQL默认端口
+          'user':'root',#mysql默认用户名
+          'password':'123456',
+          'db':'Orders',#数据库
+          'charset':'utf8mb4',
+          'cursorclass':pymysql.cursors.DictCursor,
+          }
+
+'''
+访问数据库，获取所有用户信息
+返回：用户信息  （格式：[[{key:value},...], ...]）
+异常：返回0
+'''
+def getAllCustomers():
+    try:
+        db= pymysql.connect(**config)
+        cursor = db.cursor()
+        sql = "SELECT * FROM customer"
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        db.close()
+        return results
+    except Exception:
+        return 0
+        
+
+'''
+访问数据库，获取所有产品信息
+返回：产品信息  （格式：[[{key:value},...], ...]）
+异常：返回0
+'''
+def getAllProducts():
+    try:
+        db= pymysql.connect(**config)
+        cursor = db.cursor()
+        sql = "SELECT * FROM product"
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        db.close()
+        return results
+    except Exception:
+        return 0
+        
+
+'''
+访问数据库，获取用户欠款信息
+输入：用户id
+返回：欠款信息  （格式：[[{key:value}, ...]]）
+异常：返回0
+'''
+def getArrears(custid):
+    try:
+        db= pymysql.connect(**config)
+        cursor = db.cursor()
+        sql = "SELECT * FROM arrears WHERE custid = '%s'" % (custid)
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        db.close()
+        return results
+    except Exception:
+        return 0
+
+'''
+访问数据库，获取产品库存信息
+输入：产品id
+返回：库存信息  （格式：[[{key:value}, ...]]）
+异常：返回0
+'''
+def getInventory(productid):
+    try:
+        db= pymysql.connect(**config)
+        cursor = db.cursor()
+        sql = "SELECT qty FROM inventory WHERE productid = '%s'" % (productid)
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        db.close()
+        return results  
+    except Exception:
+        return 0
+
+'''
+访问数据库，获取产品单位信息
+输入：产品id
+返回：单位信息  （格式：[[{key:value}, ...]]）
+异常：返回0
+'''
+def getProductUnit(productid):
+    try:
+        db= pymysql.connect(**config)
+        cursor = db.cursor()
+        sql = "SELECT unit FROM product WHERE productid = '%s'" % (productid)
+        cursor.execute(sql)
+        unit = cursor.fetchall()
+        db.close()
+        return unit
+    except Exception:
+        return 0
+
+'''
+访问数据库，插入订单信息
+输入：用户id，产品id，订货数量，类型（D1,D2,D3）
+异常：返回0
+'''
+def InsertOrder(custid, productid, num, form):
+    try:
+        db= pymysql.connect(**config)
+        cursor = db.cursor()
+        try:
+            sql = "INSERT INTO orders(custid, productid, num, form) VALUES (%s, %s, %s, %s)"
+            data = (custid, productid, num, form)
+            cursor.execute(sql, data)
+            db.commit()
+        except Exception:
+            db.rollback()
+            return 0
+        db.close()
+        return 1
+    except Exception:
+        return 0
+
+'''
+访问数据库，删除订单信息
+输入：用户id，产品id
+异常：返回0
+'''
+def DeleteOrder(custid, productid):
+    try:
+        db= pymysql.connect(**config)
+        cursor = db.cursor()
+        try:
+            sql = "DELETE FROM orders WHERE custid = '%s' and productid = '%s'" % (custid, productid)
+            cursor.execute(sql)
+            db.commit()
+        except Exception:
+            db.rollback()
+            return 0
+        db.close()
+        return 1
+    except Exception:
+        return 0
+
+'''
+访问数据库，更新产品库存
+输入：产品id，更新后的库存
+异常：返回0
+'''
+def UpdateInventory(productid, qty):
+    try:
+        db= pymysql.connect(**config)
+        cursor = db.cursor()
+        try:
+            sql = "UPDATE inventory SET qty = %s WHERE productid = %s" % (qty, productid)
+            cursor.execute(sql)
+            db.commit()
+        except Exception:
+            db.rollback()
+            return 0
+        db.close()
+        return 1
+    except Exception:
+        return 0
+
+
+
+
+
+
+
+
+ui2.py
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'untitled.ui'
+#
+# Created by: PyQt5 UI code generator 5.10.1
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+from utils import(
+    updateCustomers, updateProducts, getCustomerArrears, getProduct, Decision,CreateOrder
+)
+from PyQt5.QtCore import QDate, QProcess
+from PyQt5.QtWidgets import QMessageBox
+import sys
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        #界面绘制
+        Dialog.setWindowTitle("订单处理系统")
+        Dialog.resize(817, 450)
+        
+        self.input_list_bt = QtWidgets.QPushButton(Dialog)
+        self.input_list_bt.setGeometry(QtCore.QRect(10, 10, 93, 28))
+        self.input_list_bt.setText("输入订货单")
+        self.tree_show_bt = QtWidgets.QPushButton(Dialog)
+        self.tree_show_bt.setGeometry(QtCore.QRect(110, 10, 93, 28))
+        self.tree_show_bt.setText("显示判定树")
+        self.tree_show_bt.setEnabled(False)
+        self.tree_run_bt = QtWidgets.QPushButton(Dialog)
+        self.tree_run_bt.setGeometry(QtCore.QRect(210, 10, 93, 28))
+        self.tree_run_bt.setText("运行判定树")
+        self.tree_run_bt.setEnabled(False)
+        self.illustrate_bt = QtWidgets.QPushButton(Dialog)
+        self.illustrate_bt.setGeometry(QtCore.QRect(310, 10, 93, 28))
+        self.illustrate_bt.setText("程序说明") 
+        self.code_show_bt = QtWidgets.QPushButton(Dialog)
+        self.code_show_bt.setGeometry(QtCore.QRect(410, 10, 93, 28))
+        self.code_show_bt.setText("显示源码")
+        self.exit_bt = QtWidgets.QPushButton(Dialog)
+        self.exit_bt.setGeometry(QtCore.QRect(510, 10, 93, 28))
+        self.exit_bt.setText("退出")
+        
+        self.client_info_lb = QtWidgets.QLabel(Dialog)
+        self.client_info_lb.setGeometry(QtCore.QRect(30, 50, 91, 16))
+        self.client_info_lb.setText("订货客户信息")
+        self.client_info_lb.setEnabled(False)
+        
+        self.client_cs_lb = QtWidgets.QLabel(Dialog)
+        self.client_cs_lb.setGeometry(QtCore.QRect(40, 80, 72, 15))
+        self.client_cs_lb.setText("选择客户：")
+        self.client_cs_lb.setEnabled(False)
+        self.client_cs_cb = QtWidgets.QComboBox(Dialog)
+        self.client_cs_cb.setGeometry(QtCore.QRect(140, 80, 201, 22))
+        self.client_cs_cb.addItem("选择客户")
+        self.client_cs_cb.setEnabled(False)
+        
+        self.debt_lb = QtWidgets.QLabel(Dialog)
+        self.debt_lb.setGeometry(QtCore.QRect(40, 110, 72, 15))
+        self.debt_lb.setText("欠款金额：")
+        self.debt_lb.setEnabled(False)
+        self.debt_show_lb = QtWidgets.QLabel(Dialog)
+        self.debt_show_lb.setGeometry(QtCore.QRect(140, 110, 72, 15))
+        self.debt_show_lb.setEnabled(False)
+        
+        self.debt_time_lb = QtWidgets.QLabel(Dialog)
+        self.debt_time_lb.setGeometry(QtCore.QRect(280, 110, 72, 15))
+        self.debt_time_lb.setText("欠款时间")
+        self.debt_time_lb.setEnabled(False)
+        self.debt_time_show_lb = QtWidgets.QLabel(Dialog)
+        self.debt_time_show_lb.setGeometry(QtCore.QRect(370, 110, 82, 15))
+        self.debt_time_show_lb.setEnabled(False)
+        
+        self.line_1t1 = QtWidgets.QFrame(Dialog)
+        self.line_1t1.setGeometry(QtCore.QRect(10, 50, 16, 16))
+        self.line_1t1.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_1t1.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_1t2 = QtWidgets.QFrame(Dialog)
+        self.line_1t2.setGeometry(QtCore.QRect(120, 50, 681, 20))
+        self.line_1t2.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_1t2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_1b = QtWidgets.QFrame(Dialog)
+        self.line_1b.setGeometry(QtCore.QRect(10, 130, 791, 16))
+        self.line_1b.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_1b.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_1l = QtWidgets.QFrame(Dialog)
+        self.line_1l.setGeometry(QtCore.QRect(0, 60, 20, 81))
+        self.line_1l.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_1l.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_1r = QtWidgets.QFrame(Dialog)
+        self.line_1r.setGeometry(QtCore.QRect(790, 60, 20, 81))
+        self.line_1r.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_1r.setFrameShadow(QtWidgets.QFrame.Sunken)
+        
+        self.product_info_lb = QtWidgets.QLabel(Dialog)
+        self.product_info_lb.setGeometry(QtCore.QRect(30, 150, 91, 16))
+        self.product_info_lb.setText("订货产品信息")
+        self.product_info_lb.setEnabled(False)
+        
+        self.product_cs_lb = QtWidgets.QLabel(Dialog)
+        self.product_cs_lb.setGeometry(QtCore.QRect(40, 180, 72, 15))
+        self.product_cs_lb.setText("选择产品：")
+        self.product_cs_lb.setEnabled(False)
+        self.product_cs_cb = QtWidgets.QComboBox(Dialog)
+        self.product_cs_cb.setGeometry(QtCore.QRect(140, 180, 161, 22))
+        self.product_cs_cb.addItem("选择产品")
+        self.product_cs_cb.setEnabled(False)
+        
+        self.lib_num_lb = QtWidgets.QLabel(Dialog)
+        self.lib_num_lb.setGeometry(QtCore.QRect(460, 180, 72, 15))
+        self.lib_num_lb.setText("库存数量")
+        self.lib_num_lb.setEnabled(False)
+        self.lib_num_show_lb = QtWidgets.QLabel(Dialog)
+        self.lib_num_show_lb.setGeometry(QtCore.QRect(560, 180, 72, 15))
+        self.lib_num_show_lb.setEnabled(False)
+        self.lib_unit_lb = QtWidgets.QLabel(Dialog)
+        self.lib_unit_lb.setGeometry(QtCore.QRect(640, 180, 72, 15))
+        self.lib_unit_lb.setEnabled(False)
+        
+        self.order_num_lb = QtWidgets.QLabel(Dialog)
+        self.order_num_lb.setGeometry(QtCore.QRect(40, 220, 72, 15))
+        self.order_num_lb.setText("订货数量：")
+        self.order_num_lb.setEnabled(False)
+        self.order_num_edit = QtWidgets.QLineEdit(Dialog)
+        self.order_num_edit.setGeometry(QtCore.QRect(140, 220, 91, 21))
+        self.order_num_edit.setEnabled(False)
+        
+        self.order_time_lb = QtWidgets.QLabel(Dialog)
+        self.order_time_lb.setGeometry(QtCore.QRect(460, 220, 72, 15))
+        self.order_time_lb.setText("订货时间：")
+        self.order_time_lb.setEnabled(False)
+        self.order_time_de = QtWidgets.QDateEdit(Dialog)
+        self.order_time_de.setGeometry(QtCore.QRect(560, 220, 100, 22))
+        self.order_time_de.setEnabled(False)
+        self.order_time_de.setDate(QDate.currentDate())
+        self.order_time_de.setDisplayFormat("yyyy-MM-dd")
+        
+        
+        self.line_2t1 = QtWidgets.QFrame(Dialog)
+        self.line_2t1.setGeometry(QtCore.QRect(10, 150, 16, 16))
+        self.line_2t1.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_2t1.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2t2 = QtWidgets.QFrame(Dialog)
+        self.line_2t2.setGeometry(QtCore.QRect(120, 150, 681, 20))
+        self.line_2t2.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_2t2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2b = QtWidgets.QFrame(Dialog)
+        self.line_2b.setGeometry(QtCore.QRect(10, 240, 791, 16))
+        self.line_2b.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_2b.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2l = QtWidgets.QFrame(Dialog)
+        self.line_2l.setGeometry(QtCore.QRect(0, 160, 20, 91))
+        self.line_2l.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_2l.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2r = QtWidgets.QFrame(Dialog)
+        self.line_2r.setGeometry(QtCore.QRect(790, 160, 20, 91))
+        self.line_2r.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_2r.setFrameShadow(QtWidgets.QFrame.Sunken)
+        
+        self.strategy_lb = QtWidgets.QLabel(Dialog)
+        self.strategy_lb.setGeometry(QtCore.QRect(30, 260, 72, 15))
+        self.strategy_lb.setText("处置策略")
+        self.strategy_lb.setEnabled(False)
+        
+        self.judge_pro_lb = QtWidgets.QLabel(Dialog)
+        self.judge_pro_lb.setGeometry(QtCore.QRect(40, 290, 72, 15))
+        self.judge_pro_lb.setText("判定过程")
+        self.judge_pro_lb.setEnabled(False)
+        self.judge_pro_tb = QtWidgets.QTextBrowser(Dialog)
+        self.judge_pro_tb.setGeometry(QtCore.QRect(40, 320, 291, 91))
+        self.judge_pro_tb.setEnabled(False)
+        
+        self.result_lb = QtWidgets.QLabel(Dialog)
+        self.result_lb.setGeometry(QtCore.QRect(430, 290, 72, 15))
+        self.result_lb.setText("判定结果")
+        self.result_lb.setEnabled(False)
+        self.result_show_lb = QtWidgets.QLabel(Dialog)
+        self.result_show_lb.setGeometry(QtCore.QRect(430, 310, 201, 31))
+        self.result_show_lb.setEnabled(False)
+        
+        self.line_3t1 = QtWidgets.QFrame(Dialog)
+        self.line_3t1.setGeometry(QtCore.QRect(10, 260, 16, 16))
+        self.line_3t1.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3t1.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3t2 = QtWidgets.QFrame(Dialog)
+        self.line_3t2.setGeometry(QtCore.QRect(90, 260, 711, 20))
+        self.line_3t2.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3t2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3b = QtWidgets.QFrame(Dialog)
+        self.line_3b.setGeometry(QtCore.QRect(10, 420, 791, 20))
+        self.line_3b.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3b.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3l = QtWidgets.QFrame(Dialog)
+        self.line_3l.setGeometry(QtCore.QRect(0, 270, 20, 161))
+        self.line_3l.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_3l.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3r = QtWidgets.QFrame(Dialog)
+        self.line_3r.setGeometry(QtCore.QRect(790, 270, 20, 161))
+        self.line_3r.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_3r.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3m = QtWidgets.QFrame(Dialog)
+        self.line_3m.setGeometry(QtCore.QRect(400, 270, 20, 161))
+        self.line_3m.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_3m.setFrameShadow(QtWidgets.QFrame.Sunken)
+
+        #信号槽绑定
+        self.input_list_bt.clicked.connect(self.InputListClick)
+        self.tree_show_bt.clicked.connect(self.TreeShowClick)
+        self.tree_run_bt.clicked.connect(self.TreeRunClick)
+        self.illustrate_bt.clicked.connect(self.IllustrateClick)
+        self.code_show_bt.clicked.connect(self.CodeShowClick)
+        self.exit_bt.clicked.connect(Dialog.reject)
+        self.client_cs_cb.currentTextChanged.connect(self.ClientChange)
+        self.product_cs_cb.currentTextChanged.connect(self.ProductChange)
+        
+      
+    #客户与产品输入区域使能函数
+    #输入：True:使能, False:取消使能
+    def ClientProductEnabled(self,bol):
+        self.client_info_lb.setEnabled(bol)
+        self.client_cs_lb.setEnabled(bol)
+        self.client_cs_cb.setEnabled(bol)
+        self.debt_lb.setEnabled(bol)
+        self.debt_show_lb.setEnabled(bol)
+        self.debt_time_lb.setEnabled(bol)
+        self.debt_time_show_lb.setEnabled(bol)
+        self.product_info_lb.setEnabled(bol)
+        self.product_cs_lb.setEnabled(bol)
+        self.product_cs_cb.setEnabled(bol)
+        self.lib_num_lb.setEnabled(bol)
+        self.lib_num_show_lb.setEnabled(bol)
+        self.lib_unit_lb.setEnabled(bol)
+        self.order_num_lb.setEnabled(bol)
+        self.order_num_edit.setEnabled(bol)
+        self.order_time_lb.setEnabled(bol)
+        self.order_time_de.setEnabled(bol)
+
+    #判定过程与结果输出区域使能函数
+    #输入：True:使能, False:取消使能
+    def JudgeEnabled(self,bol):
+        self.strategy_lb.setEnabled(bol)
+        self.judge_pro_lb.setEnabled(bol)
+        self.judge_pro_tb.setEnabled(bol)
+        self.result_lb.setEnabled(bol)
+        self.result_show_lb.setEnabled(bol)
+
+    #清除所有输入输出，初始化界面函数
+    def Clear(self):
+        self.client_cs_cb.currentTextChanged.disconnect(self.ClientChange)
+        client_num = self.client_cs_cb.count()
+        for client in range(1,client_num):
+            self.client_cs_cb.removeItem(1)
+        self.debt_show_lb.setText("")
+        self.debt_time_show_lb.setText("")
+        
+        self.product_cs_cb.currentTextChanged.disconnect(self.ProductChange)
+        product_num = self.product_cs_cb.count()
+        for product in range(1,product_num):
+            self.product_cs_cb.removeItem(1)
+        self.lib_num_show_lb.setText("")
+        self.lib_unit_lb.setText("")
+        self.order_num_edit.setText("")
+        self.order_time_de.setDate(QDate.currentDate())
+        self.judge_pro_tb.clear()
+        self.result_show_lb.setText("")
+
+    #输入订货单点击槽函数
+    #加载客户产品信息，使能客户产品输入区，取消使能判定过程结果区
+    #使能显示判定树按钮，消能运行判定树按钮
+    #异常弹出提示框
+    def InputListClick(self):
+        customers = updateCustomers()
+        print(customers);
+        if customers == 0:
+            error = QMessageBox.critical(QtWidgets.QWidget(),"错误","数据库异常")
+            return
+
+        products = updateProducts()
+        if products == 0:
+            error = QMessageBox.critical(QtWidgets.QWidget(),"错误","数据库异常")
+            
+        self.Clear()
+        self.ClientProductEnabled(True)
+        self.JudgeEnabled(False)
+        self.tree_show_bt.setEnabled(True)
+        self.tree_run_bt.setEnabled(False)
+        
+        for custom in customers:
+            self.client_cs_cb.addItem(custom['custid'] + " : " + custom['custname'])
+        self.client_cs_cb.currentTextChanged.connect(self.ClientChange)
+        
+        for product in products:
+            self.product_cs_cb.addItem(product['productid'] + " : " + product['productname'])
+        self.product_cs_cb.currentTextChanged.connect(self.ProductChange)
+        
+    #显示判定树按钮点击槽函数
+    #使能判定过程结果区，使能运行判定树按钮
+    #显示判定过程
+    #异常弹出提示框
+    def TreeShowClick(self):
+        self.JudgeEnabled(True)
+        self.tree_run_bt.setEnabled(True)
+        debt = self.debt_show_lb.text()
+        debt_time = self.debt_time_show_lb.text()
+        product_num = self.order_num_edit.text()
+        lib_num = self.lib_num_show_lb.text()
+        order_time = self.order_time_de.date().toString('yyyy-MM-dd')
+        if debt == "无欠款":
+            order, process, result = Decision(product_num, lib_num, False)
+        else:
+            order, process, result = Decision(product_num, lib_num, True, order_time, debt_time)
+        if order == -1:
+            error = QMessageBox.critical(QtWidgets.QWidget(),"错误","订货量输入有误")
+            return
+        self.judge_pro_tb.setText(process)
+        
+        
+    #运行判定树按钮点击槽函数
+    #消能客户产品输入区，消能显示判定树按钮
+    #显示判定结果，产生订单输入数据库
+    #异常弹出提示框
+    def TreeRunClick(self):
+        self.ClientProductEnabled(False)
+        self.tree_show_bt.setEnabled(False)
+        debt = self.debt_show_lb.text()
+        debt_time = self.debt_time_show_lb.text()
+        product_num = self.order_num_edit.text()
+        lib_num = self.lib_num_show_lb.text()
+        order_time = self.order_time_de.date().toString('yyyy-MM-dd')
+        if debt == "无欠款":
+            order, process, result = Decision(product_num, lib_num, False)
+        else:
+            order, process, result = Decision(product_num, lib_num, True, order_time, debt_time)
+        if order == -1:
+            error = QMessageBox.critical(QtWidgets.QWidget(),"错误","订货量输入有误")
+            return
+        self.result_show_lb.setText(result)
+
+        client = self.client_cs_cb.currentText()
+        product = self.product_cs_cb.currentText()
+        if CreateOrder(client, product, product_num, lib_num, order) == -1:
+            error = QMessageBox.critical(QtWidgets.QWidget(),"错误","数据库异常")
+        
+    #程序说明按钮点击槽函数
+    #打开程序说明文件
+    def IllustrateClick(self):
+        illustrate = QProcess.execute("explorer illustrate.txt")
+        
+    #显示源码按钮点击槽函数
+    #打开源码文件
+    def CodeShowClick(self):
+        code = QProcess.execute("explorer code.txt")
+    
+    #客户选择变更槽函数
+    #同步客户的欠款和欠款日期
+    def ClientChange(self):
+        client = self.client_cs_cb.currentText()
+        debt, debt_time = getCustomerArrears(client)
+        if debt == -1:
+            error = QMessageBox.critical(QtWidgets.QWidget(),"错误","数据库异常")
+        elif debt == 0:
+            self.debt_show_lb.setText("无欠款")
+            self.debt_time_show_lb.setText("")
+        else:
+            self.debt_show_lb.setText(str(debt))
+            self.debt_time_show_lb.setText(debt_time)
+
+    #产品选择变更槽函数
+    #同步客户的欠款和欠款日期
+    def ProductChange(self):
+        product = self.product_cs_cb.currentText()
+        lib_unit, lib_num = getProduct(product)
+        if lib_num == -1:
+            error = QMessageBox.critical(QtWidgets.QWidget(),"错误","数据库异常")
+        else:
+            self.lib_unit_lb.setText(lib_unit)
+            self.lib_num_show_lb.setText(str(lib_num))
+
+
+
+utils.py
+import datetime
+from MySql import(
+    getAllCustomers, getAllProducts, getArrears, getInventory, getProductUnit, InsertOrder, DeleteOrder, UpdateInventory
+) 
+
+'''
+获取所有用户信息
+返回：用户信息  （格式：[[{key:value},...], ...]）
+数据库异常返回0
+'''
+def updateCustomers():
+    customerInfo = getAllCustomers()
+    return customerInfo
+
+'''
+获取所有产品信息
+返回：产品信息  （格式：[[{key:value},...], ...]）
+数据库异常返回0
+'''
+def updateProducts():
+    productInfo = getAllProducts()
+    return productInfo
+
+
+'''
+获取用户的欠款信息
+输入：用户信息（从updateCustomers()获取的信息）
+输出：欠款，欠款时间（没有欠款返回0，0）
+数据库异常返回-1， -1
+'''
+def getCustomerArrears(customer):
+    cust = customer.split(" ")
+    custid = cust[0]
+    arrears = getArrears(custid)
+    if(arrears == 0):
+        return -1, -1
+    elif(arrears):
+        return arrears[0]['amount'], arrears[0]['lastdate']
+    else:
+        return 0, 0
+
+
+'''
+获取产品的单位和库存
+输入：产品信息（从updateProducts（）获取的信息）
+输出：单位，库存（没有库存返回0）
+数据库异常返回-1， -1
+'''
+def getProduct(product):
+    prod = product.split(" ")
+    productid = prod[0]
+    unit = getProductUnit(productid)
+    qty = getInventory(productid)
+    if(qty == 0):
+        return -1, -1
+    elif(qty):
+        return unit[0]['unit'], qty[0]['qty']
+    else:
+        return unit[0]['unit'], 0
+
+def day_count(order_time ,owe_time):#计算欠款天数 订货时间 欠款时间
+    temp=order_time.split('-')
+    order_year=int(temp[0])
+    order_month=int(temp[1])
+    order_day=int(temp[2])
+    temp = owe_time.split('-')
+    owe_year = int(temp[0])
+    owe_month = int(temp[1])
+    owe_day = int(temp[2])
+    date1=datetime.datetime(order_year,order_month,order_day)
+    date2 = datetime.datetime(owe_year, owe_month, owe_day)
+    return date1-date2
+
+'''
+输入：订货数量， 库存， 是否欠款（根据这个后两项可选）， 订货时间， 欠款时间
+返回：订单类型（D1,D2,D3），判定过程，判定结果
+'''
+def Decision(order_num, store_num, ifowe, order_time = None ,owe_time = None):
+
+    order = ""
+    result = ""
+    process = ""
+    try:
+        order_num = int(order_num)
+        store_num = int(store_num)
+    except Exception:
+        return -1, -1, -1
+    if(order_num < 0 or store_num < 0):
+        return -1, -1, -1
+    if(ifowe==False):
+        if(order_num > store_num):
+            order = "D2"
+            process = "判定1：欠款时间为0天\n判定2：库存数量" + str(store_num) + " 小于 订货数量" + str(order_num)
+            result = "先按库存发货进货再补发"
+        else:
+            order = "D1"
+            process = "判定1：欠款时间为0天\n判定2：库存数量" + str(store_num) + " 大于等于 订货数量" + str(order_num)
+            result = "立即发货"
+    else:
+        day_num = day_count(order_time ,owe_time).days  #欠款天数
+        if(day_num <= 30):
+            if(order_num <= store_num):
+                order = "D1"
+                process = "判定1：欠款时间为" + str(day_num) + "天\n判定2：库存数量" + str(store_num) + " 大于等于 订货数量" + str(order_num)
+                result = "立即发货"
+            else:
+                order = "D2"
+                process = "判定1：欠款时间为" + str(day_num) + "天\n判定2：库存数量" + str(store_num) + " 小于 订货数量" + str(order_num)
+                result = "先按库存发货进货再补发"
+        elif(30 < day_num < 100):
+            if(order_num <= store_num):
+                order = "D3"
+                process = "判定1：欠款时间为" + str(day_num) + "天\n判定2：库存数量" + str(store_num) + " 大于等于 订货数量" + str(order_num)
+                result = "先付款再发货"
+            else:
+                order = "D3"
+                process = "判定1：欠款时间为" + str(day_num) + "天\n判定2：库存数量" + str(store_num) + " 小于 订货数量" + str(order_num)
+                result = "不发货"
+        elif(day_num >= 100):
+            if(order_num <= store_num):
+                order = "D3"
+                process = "判定1：欠款时间为" + str(day_num) + "天"
+                result = "通知先付款"
+            else:
+                order = "D3"
+                process = "判定1：欠款时间为" + str(day_num) + "天"
+                result = "通知先付款"
+    return order, process, result
+
+'''
+创建订单
+输入：客户id，产品id，订货数，库存数，类型（D1，D2，D3）
+数据库异常返回-1
+'''
+def CreateOrder(customer, product, order_num, store_num, form):
+    cust = customer.split(" ")
+    custid = cust[0]
+    prod = product.split(" ")
+    productid = prod[0]
+    order_num = int(order_num)
+    store_num = int(store_num)
+    if(form == "D1"):
+        if(InsertOrder(custid, productid, order_num, form) == 0):
+            return -1
+        if(UpdateInventory(productid, store_num - order_num) == 0):
+            return -1
+    elif(form == "D2"):
+        if(InsertOrder(custid, productid, order_num, form) == 0):
+            return -1
+    elif(form == "D3"):
+        if(InsertOrder(custid, productid, order_num, form) == 0):
+            return -1
+
