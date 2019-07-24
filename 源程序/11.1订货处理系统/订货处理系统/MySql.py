@@ -4,7 +4,7 @@ config = {
           'host':'localhost',#数据库所在主机IP
           'port':3306,#MySQL默认端口
           'user':'root',#mysql默认用户名
-          'password':'111',
+          'password':'12345',
           'db':'Orders',#数据库
           'charset':'utf8mb4',
           'cursorclass':pymysql.cursors.DictCursor,

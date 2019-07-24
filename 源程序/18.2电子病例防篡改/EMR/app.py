@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 from digital_record_system import DigitalRecordSystem
-
+import pymysql
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     system = DigitalRecordSystem()

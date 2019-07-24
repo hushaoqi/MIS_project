@@ -28,7 +28,7 @@ class TotalInterface(QtWidgets.QMainWindow,Ui_TotalInterface):
         self.C.setMaterialNum(self.A.pro_num)
         self.D.setMaterialNum(self.C.material_num)
 
-        self.db = pymysql.connect(host="localhost", user="root",password="root", db="nego_db", port=3306)  # 数据库连接
+        self.db = pymysql.connect(host="localhost", user="root",password="12345", db="nego_db", port=3306)  # 数据库连接
         self.cur = self.db.cursor()
         # SQL更新语句
         sql_A = "update product_sup set priority = '%s',profit_expect = '%s',profit_relax_value = '%s',profit_final = '%s' where Id = 'A'"
@@ -122,7 +122,7 @@ class Result(QtWidgets.QMainWindow,Ui_NegoResult):
         self.Quit.clicked.connect(self.Quit_ReturnTotal)
 
     def SaveResult(self):
-        self.db = pymysql.connect(host="localhost", user="root", password="root", db="nego_db", port=3306)  # 数据库连接
+        self.db = pymysql.connect(host="localhost", user="root", password="12345", db="nego_db", port=3306)  # 数据库连接
         self.cur = self.db.cursor()
         sql_A = "update finally set unit_price_expect = '%s',unit_prices = '%s',profit_final = '%s',trans_profit_expect = '%s',total_cost_expect = '%s',unit_cost_expect = '%s',trans_final = '%s',material_final = '%s' where id = '1'"
         try:
@@ -249,7 +249,7 @@ class DTrains(object):
 
 def DB_init():
     db = pymysql.connect(host="localhost", user="root",
-                         password="root", db="nego_db", port=3306)  # 数据库连接
+                         password="12345", db="nego_db", port=3306)  # 数据库连接
     cur = db.cursor()
     # SQL初始化语句
     sql_A = "insert into product_sup(id,profit_expect,profit_relax_value,profit_final,priority) values('A',0,0,0,1)"

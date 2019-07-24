@@ -10,7 +10,7 @@ import re
 
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QApplication, QWidget
-
+import numpy.core._dtype_ctypes
 sys.path.append("..")
 from model.Model import *
 

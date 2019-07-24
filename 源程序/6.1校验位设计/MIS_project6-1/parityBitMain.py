@@ -146,7 +146,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow-ParityBit"))
-        self.titleLabel.setText(_translate("MainWindow", "代 码 校 验 位 检 验"))
+        self.titleLabel.setText(_translate("MainWindow", "校 验 位 设 计"))
         self.commodityNameLabel.setText(_translate("MainWindow", "商品名称"))
         self.specificationLabel.setText(_translate("MainWindow", " 规  格 "))
         self.chargeUnitLabel.setText(_translate("MainWindow", "计量单位"))

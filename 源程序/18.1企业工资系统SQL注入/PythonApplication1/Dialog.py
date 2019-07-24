@@ -21,7 +21,7 @@ class Ui_Dialog1(object):
         self.dialog=Dialog1
         self.name= name
         self.ID = self_ID
-
+        print("name:",name,"self_ID",self_ID)
         #注销按钮
         self.Logout = QtWidgets.QPushButton(Dialog1)
         self.Logout.setGeometry(QtCore.QRect(610, 500, 93, 28))
@@ -200,6 +200,8 @@ class Ui_Dialog1(object):
             #按工号读取个人信息
             self.cur1.execute(self.sqlstring)
             self.rows = self.cur1.fetchall()
+            print("self.rows = self.cur1.fetchall():",self.rows,"self.name:",self.name,"self.ID:",self.ID)
+
             self.cur1.close()
 
             #个人信息显示数据初始化
@@ -216,10 +218,11 @@ class Ui_Dialog1(object):
 
             #按月份查找本月工资
             self.cur2 = self.conn.cursor()
-            self.sqlstring2 = "select * from salary_month where Month=201807 and ID='" \
-                + self.ID + "'"
+            self.sqlstring2 = "select * from salary_month where Name='" \
+                + self.rows[0][1] + "'"
             self.cur2.execute(self.sqlstring2)
             self.rows2 = self.cur2.fetchall()
+            print("self.rows2 = self.cur2.fetchall():",self.rows2)
             self.cur2.close()
 
             #本月工资显示数据初始化
@@ -231,10 +234,12 @@ class Ui_Dialog1(object):
 
             #按工号读取工资表
             self.cur3 = self.conn.cursor()
-            self.sqlstring3 = "select * from salary_month where ID='" \
-                + self.ID + "'"
+            self.sqlstring3 = "select * from salary_month where Name='" \
+                + self.rows[0][1] + "'"
             self.cur3.execute(self.sqlstring3)
             self.rows3 = self.cur3.fetchall()
+            print("self.rows3 = self.cur3.fetchall():",self.rows3)
+
             self.cur3.close()
             #将读取到的历史工资按月份逐条注入
             for self.row in self.rows3:

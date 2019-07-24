@@ -14,7 +14,7 @@ import Dialog,Dialog2
 import sys
 import pymysql
 import traceback
-
+from PyQt5.QtWidgets import *
 
 
 class Ui_Form(object):  #这是用PyQt Designer生成的代码，很简单的，拖动控件，生成ui文件，然后UIC转换成py文件
@@ -106,11 +106,13 @@ class Ui_Form(object):  #这是用PyQt Designer生成的代码，很简单的，
         passwd = self.PasswordInput.text()  #获取输入的密码
         self.sql = "select * from users where ID= '" + name + \
             "' and Password='" + passwd + "'"
-        print(self.sql)
+        print("登录信息：",self.sql)
         try:
-            self.cur.execute(self.sql)
-            print(self.cur.execute(self.sql))
+            res = self.cur.execute(self.sql)
+            print("res:",res)
+
             self.rows = self.cur.fetchall()
+            print("self.rows",self.rows)
             self.ID = self.rows[0][0]#（这里获取数据库中正确的用户名）
             #隐藏主界面并进入登录界面
             self.form.hide()
@@ -124,7 +126,7 @@ class Ui_Form(object):  #这是用PyQt Designer生成的代码，很简单的，
             self.form.show()
         except Exception:  # 捕获所有异常
             # 如果发生异常，则回滚
-            print("发生异常")
+            print("登录发生异常")
             traceback.print_exc()
             self.conn.rollback()
         self.cur.close()
